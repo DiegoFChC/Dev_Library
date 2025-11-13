@@ -18,7 +18,7 @@ interface DocsProps {
   }
 }
 
-export async function generateMetadata({ params } : metadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }): Promise<Metadata> {
   const { topic, slug } = await params
 
   const { data } = getNotesBySlug([topic, ...slug])
