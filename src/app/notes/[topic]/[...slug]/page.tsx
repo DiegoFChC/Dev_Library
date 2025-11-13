@@ -5,10 +5,7 @@ import type { Metadata } from 'next'
 import './page.css'
 
 type metadataProps = {
-  params: {
-    topic: string,
-    slug: string[]
-  }
+  params: Promise<{ topic: string, slug: string[] }>
 }
 
 interface DocsProps {
@@ -18,7 +15,7 @@ interface DocsProps {
   }
 }
 
-export async function generateMetadata({ params }): Promise<Metadata> {
+export async function generateMetadata({ params } : metadataProps): Promise<Metadata> {
   const { topic, slug } = await params
 
   const { data } = getNotesBySlug([topic, ...slug])

@@ -5,14 +5,12 @@ import { Navbar, TopBar } from '@/components'
 import './layout.css'
 
 interface NotesLayoutProps {
-  params: {
-    topic: string
-  }
+  params: Promise<{ topic: string }>
   children: ReactNode
 }
 
 export default async function NotesLayout ({ params, children } : NotesLayoutProps) {
-  const { topic } = params
+  const { topic } = await params
   const tree: NoteTreeNode[] = getNotesTree(topic)
   
   return (
