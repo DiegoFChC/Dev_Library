@@ -11,8 +11,8 @@ interface NotesLayoutProps {
   children: ReactNode
 }
 
-export default async function NotesLayout ({ params, children }) {
-  const { topic } = await params
+export default async function NotesLayout ({ params, children } : NotesLayoutProps) {
+  const { topic } = params
   const tree: NoteTreeNode[] = getNotesTree(topic)
   
   return (
