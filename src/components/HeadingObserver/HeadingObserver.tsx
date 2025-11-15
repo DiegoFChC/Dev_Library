@@ -1,11 +1,18 @@
 'use client'
 
+import type { JSX } from 'react'
 import { parseContentMarkdoc } from '@/services/client'
 import { useObserver } from '@/hooks/useObserver'
+import { Tag } from '@markdoc/markdoc'
 import './HeadingObserver.css'
 
-export function HeadingObserver({ content }) {
-  const { children } = parseContentMarkdoc(content)
+interface HeadingOberverProps {
+  content: string
+}
+
+export function HeadingObserver({ content }: HeadingOberverProps): JSX.Element {
+  const tree = parseContentMarkdoc(content) as Tag
+  const { children } = tree
   const tags = children.filter(
     (item) => item.name === 'Heading' && item.attributes.level > 1
   )

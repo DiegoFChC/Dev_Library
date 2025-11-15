@@ -1,9 +1,10 @@
 import { useTheme } from '@/hooks/useTheme'
 import { ReactNode, useMemo, createContext, useContext } from 'react'
+import type { Theme } from '@/types'
 
 interface ThemeContextValue {
-  theme: 'light' | 'dark' | 'system'
-  handleTheme: (newTheme: 'light' | 'dark' | 'system') => void 
+  theme: Theme
+  handleTheme: (newTheme: Theme) => void
   isMounted: boolean
 }
 
@@ -13,7 +14,7 @@ interface ThemeContextProviderProps {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 
-export function useThemeContext () : ThemeContextValue {
+export function useThemeContext(): ThemeContextValue {
   const context = useContext(ThemeContext)
 
   if (context === undefined) {
@@ -23,15 +24,13 @@ export function useThemeContext () : ThemeContextValue {
   return context
 }
 
+export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
+  const { theme, handleTheme, isMounted } = useTheme()
 
-export function ThemeContextProvider ({ children } : ThemeContextProviderProps) {
-  const themeHook = useTheme()
-
-  const value = useMemo(() => themeHook, [themeHook])
-
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+  const value = useMemo(
+    () => ({ theme, handleTheme, isMounted }),
+    [theme, handleTheme, isMounted]
   )
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

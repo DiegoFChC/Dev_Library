@@ -1,12 +1,14 @@
 'use client'
 
+import type { JSX } from 'react'
+import type { Theme } from '@/types'
 import { Button } from '../Button/Button'
 import { useThemeContext } from '@/context'
 import { Sun, Moon, Screen } from '../Icons/Icons'
 import { useState } from 'react'
 import './ThemeToggle.css'
 
-export function ThemeToggle() {
+export function ThemeToggle(): JSX.Element {
   const { theme, handleTheme, isMounted } = useThemeContext()
   const [ activeModal, setActiveModal ] = useState(false)
 
@@ -20,7 +22,7 @@ export function ThemeToggle() {
     setActiveModal(prev => !prev)
   }
 
-  const changeTheme = (newTheme: 'dark' | 'light' | 'system') => {
+  const changeTheme = (newTheme: Theme) => {
     handleTheme(newTheme)
     setActiveModal(false)
   }
@@ -29,13 +31,13 @@ export function ThemeToggle() {
     <div className='ThemeToggle'>
       <span onClick={handleModal}>{themeIcon}</span>
       <div className={`container ${activeModal && 'active'}`}>
-        <Button title='System' handelFunction={() => changeTheme('system')}>
+        <Button title='System' onClick={() => changeTheme('system')}>
           <Screen />
         </Button>
-        <Button title='Dark' handelFunction={() => changeTheme('dark')}>
+        <Button title='Dark' onClick={() => changeTheme('dark')}>
           <Moon />
         </Button>
-        <Button title='Light' handelFunction={() => changeTheme('light')}>
+        <Button title='Light' onClick={() => changeTheme('light')}>
           <Sun />
         </Button>
       </div>

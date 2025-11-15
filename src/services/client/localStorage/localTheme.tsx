@@ -1,13 +1,14 @@
 import { getSystemTheme, upadteDOMTheme } from '../theme/theme'
+import type { Theme } from '@/types'
 
-export function saveTheme (theme : string) {
+export function saveTheme (theme : Theme): void {
   if (typeof window === 'undefined') return
   upadteDOMTheme(theme)
   localStorage.setItem('theme', theme)
 }
 
-export function getCurrentTheme () : string {
+export function getCurrentTheme () : Theme {
   if (typeof window === 'undefined') return 'light'
-  const currentTheme = localStorage.getItem('theme')
-  return currentTheme || getSystemTheme()
+  const currentTheme = localStorage.getItem('theme') as Theme | null
+  return currentTheme ?? getSystemTheme()
 }

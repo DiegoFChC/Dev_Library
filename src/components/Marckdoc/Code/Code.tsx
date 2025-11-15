@@ -1,6 +1,10 @@
-import type { ReactNode } from 'react'
+import type { JSX } from 'react'
 import './Code.css'
 
-export function Code ({ content } : { content: string }) : ReactNode {
+interface CodeProps {
+  content: string
+}
+
+export function Code ({ content } : CodeProps) : JSX.Element {
   return <code className='Code'>{content}</code>
 }

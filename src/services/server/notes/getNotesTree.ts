@@ -1,17 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import type { NoteTreeNode } from '@/types'
 
-const NOTES_ROOT_DIR: string = path.join(process.cwd(), 'src', 'notes')
-const NOTE_FILE_EXTENSION: string = '.md'
-
-export interface NoteTreeNode {
-  title: string
-  slug?: string
-  path?: string
-  order?: number
-  children?: NoteTreeNode[]
-}
+const NOTES_ROOT_DIR = path.join(process.cwd(), 'src', 'notes')
+const NOTE_FILE_EXTENSION = '.md'
 
 export function getNotesTree(topic: string): NoteTreeNode[] {
   const decodedTopic = decodeURIComponent(topic)
@@ -22,34 +15,37 @@ export function getNotesTree(topic: string): NoteTreeNode[] {
 function readDirectoryRecursive(dirPath: string, dirParent: string): NoteTreeNode[] {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
 
-  const nodes = entries.map(entry => {
+  const nodes: NoteTreeNode[] = []
+  
+  for (const entry of entries) {
     const { name: entryName, parentPath } = entry
-    const entryPath = path.join(parentPath, entryName) // Path
+    const entryPath = path.join(parentPath, entryName)
 
     if (entry.isDirectory()) {
-      const newDirParent: string = dirParent + '/' + encodeURIComponent(entryName)
-      return {
+      const newDirParent: string = `${dirParent}/${encodeURIComponent(entryName)}`
+      
+      nodes.push({
         title: entryName,
-        children: [...readDirectoryRecursive(entryPath, newDirParent)]
-      }
+        children: readDirectoryRecursive(entryPath, newDirParent)
+      })
+
+      continue
     }
 
     if (entry.isFile() && entryName.endsWith(NOTE_FILE_EXTENSION)) {
-      const fileName: string = entryName.replace(/\.md/, '')
+      const fileName = entryName.replace(/\.md/, '')
 
-      const raw = fs.readFileSync(entryPath, 'utf-8')
+      const raw = fs.readFileSync(entryPath, 'utf8')
       const { data } = matter(raw)
 
-      return {
+      nodes.push({
         title: fileName,
         slug: `${dirParent}/${encodeURIComponent(fileName)}`,
-        path: path.join(dirParent, entryName),
-        order: data.order ?? 9999
-      }
+        filePath: path.join(dirParent, entryName),
+        order: typeof data.order === 'number' ? data.order : 9999
+      })
     }
-
-    return null
-  }).filter(Boolean) as NoteTreeNode[]
+  }
 
   return nodes.sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
 }

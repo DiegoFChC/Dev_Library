@@ -31,13 +31,20 @@
   --blue-700: #005d6d;
 
   /* Verdes (éxito) */
-  --green-500: #22c55e;
-
+  --green: #4ADE80;
+  --green-alpha: #4ade801a;
   /* Rojos (error) */
-  --red-500: #ef4444;
-
+  --red: #F87171;
+  --red-alpha: #f8717131;
   /* Amarillos (advertencia) */
-  --yellow-500: #eab308;
+  --yellow: #FACC15;
+  --yellow-alpha: #facc151e;
+  /* Azul (información) */
+  --blue: #60A5FA;
+  --blue-alpha: #60a5fa15;
+  /* Gris (note) */
+  --gray: #9CA3AF;
+  --gray-alpha: #9ca3af15;
 }
 
 /* ---------- 2️⃣ TOKENS SEMÁNTICOS ---------- */
@@ -59,9 +66,9 @@
   /* Acciones semánticas */
   --color-primary: var(--blue-700);
   --color-primary-hover: var(--blue-600);
-  --color-success: var(--green-500);
-  --color-error: var(--red-500);
-  --color-warning: var(--yellow-500);
+  --color-success: var(--green);
+  --color-error: var(--red);
+  --color-warning: var(--yellow);
 
   /* Fondo global con gradiente (opcional) */
   --gradient-bg: linear-gradient(

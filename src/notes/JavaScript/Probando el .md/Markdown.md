@@ -57,6 +57,48 @@ You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
 >
 >> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 
+```md
+> **Markdown** is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+>
+>> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+```
+
+> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+{% callout %}
+**Note no prop** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+```md
+{% callout %}
+**Note no prop** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+```
+
+{% callout type="note" %}
+**Note** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+{% callout type="caution" %}
+**Caution** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+{% callout type="danger" %}
+**Danger** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+{% callout type="info" %}
+**Info** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+{% callout type="tip" %}
+**Tip** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
+{% callout type="tip" title="Custom Tittle" %}
+**Tip custom tittle** Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+{% /callout %}
+
 ## Tables
 
 | Left columns  | Right columns | Right columns |

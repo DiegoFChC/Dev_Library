@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react'
+import type { JSX } from 'react'
 import { SectionTitle } from '../SectionTitle/SectionTitle'
 import { TopicButton } from '../TopicButton/TopicButton'
 import { topics } from './Topics'
 import './Landing.css'
 
-export function Landing(): ReactNode {
+export function Landing(): JSX.Element {
   return (
     <article className='Landing'>
       <section className='mainTitle'>
@@ -23,7 +23,7 @@ export function Landing(): ReactNode {
             topics?.map(item => {
               const { name, topic, img } = item
               return (
-                <TopicButton  key={name} name={name} topic={topic} img={img} />
+                <TopicButton key={topic} name={name} topic={topic} img={img} />
               )
             })
           }

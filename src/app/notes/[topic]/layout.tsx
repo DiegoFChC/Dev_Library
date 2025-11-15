@@ -1,6 +1,6 @@
+import type { NoteTreeNode } from '@/types'
 import { getNotesTree } from '../../../services/server/notes/getNotesTree'
 import { ReactNode } from 'react'
-import { NoteTreeNode } from '../../../services/server/notes/getNotesTree'
 import { Navbar, TopBar } from '@/components'
 import './layout.css'
 

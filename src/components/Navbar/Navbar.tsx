@@ -1,11 +1,16 @@
 'use client'
 
+import type { JSX } from 'react'
 import { ListTopic } from './ListTopic/ListTopic'
 import { NoteTreeNode } from '@/types/types'
 import { useAppContext } from '@/context'
 import './Navbar.css'
 
-export function Navbar({ nodes }: { nodes: NoteTreeNode[] }) {
+interface NavbarProps {
+  nodes: NoteTreeNode[]
+}
+
+export function Navbar({ nodes }: NavbarProps): JSX.Element {
   const { menuState, deactivateMenu } = useAppContext()
 
   return (

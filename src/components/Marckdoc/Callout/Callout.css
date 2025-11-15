@@ -1,0 +1,69 @@
+.Callout {
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 7px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Callout .title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Callout .title > h6 {
+  margin: 0;
+}
+
+.Callout.note {
+  background-color: var(--gray-alpha);
+  border-left: 3px solid var(--gray);
+}
+
+.Callout.note .title > svg,
+.Callout.note .title > h6 {
+  color: var(--gray);
+}
+
+.Callout.caution {
+  background-color: var(--yellow-alpha);
+  border-left: 3px solid var(--yellow);
+}
+
+.Callout.caution svg,
+.Callout.caution h6 {
+  color: var(--yellow);
+}
+
+.Callout.danger {
+  background-color: var(--red-alpha);
+  border-left: 3px solid var(--red);
+}
+
+.Callout.danger svg,
+.Callout.danger h6 {
+  color: var(--red);
+}
+
+.Callout.info {
+  background-color: var(--blue-alpha);
+  border-left: 3px solid var(--blue);
+}
+
+.Callout.info svg,
+.Callout.info h6 {
+  color: var(--blue);
+}
+
+.Callout.tip {
+  background-color: var(--green-alpha);
+  border-left: 3px solid var(--green);
+}
+
+.Callout.tip svg,
+.Callout.tip h6 {
+  color: var(--green);
+}

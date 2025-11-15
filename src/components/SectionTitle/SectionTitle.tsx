@@ -1,12 +1,12 @@
-import type { ReactNode } from 'react'
+import type { JSX, ReactNode } from 'react'
 import './SectionTitle.css'
 
-type SectionTitle = {
+type SectionTitleProps = {
   children: ReactNode
   title: string
 }
 
-export function SectionTitle ({ children, title }: SectionTitle): ReactNode {
+export function SectionTitle ({ children, title }: SectionTitleProps): JSX.Element {
   return (
     <section className='SectionTitle'>
       <h2>{title}</h2>

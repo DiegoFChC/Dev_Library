@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { NoteTreeNode } from '@/services/server'
+import type { JSX } from 'react'
+import type { NoteTreeNode } from '@/types'
 import { usePathname } from 'next/navigation'
 import { useAppContext } from '@/context'
 import './Topic.css'
@@ -10,7 +11,7 @@ interface Topic {
   data: NoteTreeNode
 }
 
-export function Topic ({ data }: Topic) {
+export function Topic ({ data }: Topic): JSX.Element {
   const { deactivateMenu } = useAppContext()
   const { title, slug } = data
   const pathname = usePathname()

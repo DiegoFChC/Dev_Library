@@ -1,9 +1,15 @@
+import type { JSX } from 'react'
+import type { NoteTreeNode } from '@/types'
 import { Topic } from '../Topic/Topic'
-import { NoteTreeNode } from '@/services/server'
 import './ListTopic.css'
 
-export function ListTopic ({ topics }: { topics: NoteTreeNode }) {
+interface ListTopicProps {
+  topics: NoteTreeNode
+}
+
+export function ListTopic ({ topics }: ListTopicProps): JSX.Element {
   const { title, children } = topics
+
   return (
     <ul className='ListTopic'>
       <h5>{title}</h5>

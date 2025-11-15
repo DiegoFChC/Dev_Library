@@ -1,13 +1,18 @@
 'use client'
 
+import type { JSX } from 'react'
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
 import Link from 'next/link'
 import { ThemeContextProvider } from '@/context/ThemeContext'
 import { Menu } from '../Icons/Icons'
-import './TopBar.css'
 import { useAppContext } from '@/context'
+import './TopBar.css'
 
-export function TopBar({ showMenu = false }) {
+interface TopBarProps {
+  showMenu?: boolean
+}
+
+export function TopBar({ showMenu = false }: TopBarProps): JSX.Element {
   const { activateMenu } = useAppContext()
 
   return (

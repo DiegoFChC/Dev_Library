@@ -1,19 +1,16 @@
-import { TopBar } from '@/components'
+import type { JSX, ReactNode } from 'react'
 import { AppContextProvider } from '../context/AppContext'
 import './globals.css'
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+interface RootLayoutProps {
+  children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang='en'>
       <body>
-        <AppContextProvider>
-          {/* <TopBar /> */}
-          {children}
-        </AppContextProvider>
+        <AppContextProvider>{children}</AppContextProvider>
       </body>
     </html>
   )

@@ -1,11 +1,7 @@
-import { getNotesTree, NoteTreeNode } from './getNotesTree'
+import type { NoteTreeNode, PrevNextLinks } from '@/types'
+import { getNotesTree } from './getNotesTree'
 
-export interface PrevNextLinks {
-  prev?: NoteTreeNode
-  next?: NoteTreeNode
-}
-
-export function getPrevNext ( topic: string, currentSlug: string[] ) {
+export function getPrevNext ( topic: string, currentSlug: string[] ): PrevNextLinks {
   // const currentSlugDecode = currentSlug.map(slug => decodeURIComponent(slug))
   const tree = getNotesTree(topic)
 
@@ -18,12 +14,12 @@ export function getPrevNext ( topic: string, currentSlug: string[] ) {
   if (index === -1) return { prev: undefined, next: undefined }
 
   return {
-    prev: flatList[index - 1],
-    next: flatList[index + 1]
+    prev: index > 0 ? flatList[index - 1] : undefined,
+    next: index < flatList.length - 1 ? flatList[index + 1] : undefined
   }
 }
 
-function flattenTree(nodes: NoteTreeNode[], result: NoteTreeNode[]) {
+function flattenTree(nodes: NoteTreeNode[], result: NoteTreeNode[]): void {
   for (const node of nodes) {
     if (node.slug) result.push(node)
     if (node.children) flattenTree(node.children, result)

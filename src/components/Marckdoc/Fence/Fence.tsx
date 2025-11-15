@@ -1,20 +1,21 @@
 'use client'
 
+import type { JSX } from 'react'
 import { useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { Clipboard, CheckBox } from '@/components/Icons/Icons'
 import './Fence.css'
 
-type Fence = {
+interface FenceProps {
   language: string
   content: string
 }
 
-export function Fence({ language, content }: Fence) {
-  const [copied, setCopied] = useState(false)
+export function Fence({ language, content }: FenceProps): JSX.Element {
+  const [copied, setCopied] = useState<boolean>(false)
 
-  const handleCopyClick = () => {
+  const handleCopyClick = (): void => {
     navigator.clipboard.writeText(content)
     setCopied(true)
     setTimeout(() => setCopied(false), 1000)
@@ -31,7 +32,7 @@ export function Fence({ language, content }: Fence) {
         language={language}
         style={atomOneDark}
         customStyle={{ background: 'transparent' }}
-        wrapLongLines={true}
+        wrapLongLines
       >
         {content}
       </SyntaxHighlighter>

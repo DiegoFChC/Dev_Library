@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
 
-const OBSERVER_CONF = {
+const OBSERVER_CONF: IntersectionObserverInit = {
   root: null,
   rootMargin: '-115px 0% 0%',
   threshold: 0,
 }
 
 export function useObserver() {
-  const [activeId, setActiveId] = useState('')
+  const [activeId, setActiveId] = useState<string>('')
+
   useEffect(() => {
-    const $headings = document.querySelectorAll(
+    const intersectionHandler = (entry: IntersectionObserverEntry) => {
+      const id = (entry.target as HTMLElement).id
+      setActiveId(id)
+    }
+
+    const $headings = document.querySelectorAll<HTMLElement>(
       '.DocPage > article > .newSection'
     )
 
@@ -22,11 +28,6 @@ export function useObserver() {
     }, OBSERVER_CONF)
 
     $headings.forEach((heading) => observer.observe(heading))
-
-    const intersectionHandler = (entry) => {
-      const id = entry.target.id
-      setActiveId(id)
-    }
 
     return () => {
       observer.disconnect()

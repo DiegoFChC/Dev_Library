@@ -1,15 +1,15 @@
+import type { JSX } from 'react'
 import Link from 'next/link'
-import './TopicButton.css'
-import { ReactNode } from 'react'
 import Image from 'next/image'
+import './TopicButton.css'
 
-type TopicButton = {
+interface TopicButtonProps {
   name: string
   topic: string
   img: string
 }
 
-export function TopicButton({ name, topic, img }: TopicButton): ReactNode {
+export function TopicButton({ name, topic, img }: TopicButtonProps): JSX.Element {
   return (
     <Link
       href={`/notes/${topic}/Descripción%20general/Intro`}

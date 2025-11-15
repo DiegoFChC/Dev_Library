@@ -1,10 +1,25 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import { createContext, useContext, useState } from 'react'
 
-const AppContext = createContext(undefined)
+interface ModalState {
+  menu: boolean
+}
 
-export function useAppContext() {
+interface AppContextValue {
+  menuState: boolean
+  activateMenu: () => void
+  deactivateMenu: () => void
+}
+
+interface AppProviderProps {
+  children: ReactNode
+}
+
+const AppContext = createContext<AppContextValue | undefined>(undefined)
+
+export function useAppContext(): AppContextValue {
   const context = useContext(AppContext)
 
   if (context === undefined) {
@@ -14,8 +29,8 @@ export function useAppContext() {
   return context
 }
 
-export function AppContextProvider({ children }) {
-  const [modal, setModal] = useState({ menu: false })
+export function AppContextProvider({ children }: AppProviderProps) {
+  const [modal, setModal] = useState<ModalState>({ menu: false })
 
   const activateMenu = () => {
     setModal((prev) => ({ ...prev, menu: true }))
@@ -25,11 +40,11 @@ export function AppContextProvider({ children }) {
     setModal((prev) => ({ ...prev, menu: false }))
   }
 
-  return (
-    <AppContext.Provider
-      value={{ menuState: modal.menu, activateMenu, deactivateMenu }}
-    >
-      {children}
-    </AppContext.Provider>
-  )
+  const value: AppContextValue = {
+    menuState: modal.menu,
+    activateMenu,
+    deactivateMenu,
+  }
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

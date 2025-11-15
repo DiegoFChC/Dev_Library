@@ -1,15 +1,15 @@
-import type { ReactElement } from 'react'
+import type { ReactNode } from 'react'
 import './Button.css'
 
-interface Button {
-  children?: ReactElement
+interface ButtonProps {
+  children?: ReactNode
   title?: string
-  handelFunction?: () => void
+  onClick?: () => void
 }
 
-export function Button({ children, title, handelFunction }: Button) {
+export function Button({ children, title, onClick }: ButtonProps) {
   return (
-    <button className='Button' onClick={handelFunction}>
+    <button className='Button' onClick={onClick}>
       {children}
       {title}
     </button>
